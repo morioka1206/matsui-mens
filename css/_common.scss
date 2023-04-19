@@ -1,0 +1,202 @@
+@mixin l {
+  @media screen and (max-width: 1010px) {
+    @content;
+  }
+}
+
+@mixin m {
+  @media screen and (max-width: 680px) {
+    @content;
+  }
+}
+
+@mixin s {
+  @media screen and (max-width: 520px) {
+    @content;
+  }
+}
+
+/* 共通の要素--------------------------------------------------------------------------------------- */
+html {
+  font-size: 62.5%;
+
+  scroll-behavior: smooth;
+}
+
+a {
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+
+    opacity: 0.7;
+  }
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  object-fit: cover;
+}
+
+*:focus {
+  outline: none;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #333;
+}
+
+.pc {
+  @include m {
+    display: none;
+  }
+}
+
+.sp {
+  display: none;
+  @include m {
+    display: block;
+  }
+}
+
+.wrap {
+  position: relative;
+
+  overflow-x: hidden;
+
+  max-width: 100%;
+}
+
+// どきどき
+@keyframes dokidoki {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  80% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dokidoki {
+  animation-name: dokidoki;
+  /* アニメーション名の指定 */
+  animation-delay: 0s;
+  /* アニメーションの開始時間指定 */
+  animation-duration: 1s;
+  /* アニメーション動作時間の指定 */
+  animation-timing-function: linear;
+  /* アニメーションの動き（徐々に早く徐々に遅く）*/
+  animation-iteration-count: infinite;
+  /* アニメーションをループさせる */
+}
+
+// カラー
+$back: #e8ebfa;
+
+/*ハンバーガーメニュー--------------------------------------------------------------------*/
+.hamburger {
+  position: fixed;
+  z-index: 20;
+  top: 20px;
+  right: 20px;
+
+  display: none;
+
+  cursor: pointer;
+  transition: 0.3s;
+
+  @include l {
+    display: block;
+  }
+
+  &__bar {
+    display: block;
+
+    width: 30px;
+    height: 2px;
+    margin-bottom: 7px;
+
+    transition: 0.4s;
+
+    background-color: #333;
+  }
+
+  .cross {
+    &-top {
+      transition: 0.3s;
+      transform: translateY(9px) rotate(45deg);
+    }
+    &-middle {
+      opacity: 0;
+    }
+    &-bottom {
+      transition: 0.3s;
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
+}
+
+/*ハンバーガーメニュー内-----------------------------------------------------------------*/
+.slide {
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  right: 0;
+
+  overflow-y: scroll;
+
+  width: 60%;
+  height: 100vh;
+  padding: 80px 0;
+
+  transition: 0.5s;
+  transform: translateX(100%);
+
+  background-color: lightgray;
+  &.show {
+    transition: 0.5s;
+    transform: translateX(0);
+  }
+
+  &__nav {
+    padding: 0 15px;
+  }
+
+  &__menu {
+    font-size: 1.5rem;
+
+    display: block;
+
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+
+    border-bottom: #333 solid 1px;
+  }
+
+  &__none {
+    overflow: hidden;
+  }
+}
